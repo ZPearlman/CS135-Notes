@@ -143,6 +143,7 @@ int pop(LinkedList &ll, int index){
     return item;
 }
 
+//Need to find a way to write this without using two nodes.
 void remove(LinkedList &ll, int item){
     node *p;
     node *temp;
@@ -153,10 +154,23 @@ void remove(LinkedList &ll, int item){
         delete p;
     }
     else{
-    // while((*(*p).next).value != item && (*p).next != NULL)
-    //     p = (*p).next;
+        temp = (*p).next;
+        while((*temp).value != item && (*temp).next != NULL){
+            p = (*p).next;
+            temp = (*temp).next;
+        }
 
+        if((*temp).value != item)
+            throw out_of_range("");
 
+        else if((*temp).next == NULL){
+            ll.end = p;
+            delete temp;
+        }
 
+        else{
+            (*p).next = (*temp).next;
+            delete temp;
+        }
     }
 }
