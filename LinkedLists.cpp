@@ -119,7 +119,7 @@ int pop(LinkedList &ll, int index){
     if (ll.count == 0 || index < 0 || index >= ll.count)
         throw out_of_range("");
 
-    else if(ll.count == 1 || index == ll.count--){
+    else if(ll.count == 1 || index == --ll.count){
         ll.count++;
         item = pop(ll);
     }
