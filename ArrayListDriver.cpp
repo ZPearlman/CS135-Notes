@@ -6,22 +6,23 @@ using namespace std;
 int main(){
     int item;
 
-    ArrayList myAL = initialize();
-    
-    addItem(myAL, 5);
-    addItem(myAL, 6);
-    addItem(myAL, 3);
-    addItem(myAL,6);
-    addItem(myAL, 8);
-    addItem(myAL, 7);
+    ArrayList<int> myAL;
 
-    /*printList(myAL);
-    item = pop(myAL, 4);
-    cout << "Popped: " <<item <<endl;
+    myAL.addItem(5);
+    myAL.addItem(6);
+    myAL.addItem(3);
+    myAL.addItem(6);
+    myAL.addItem(6);
+    myAL.addItem(7);
+
+    myAL.printList();
+    item = myAL.pop(4);
+    cout << "Popped: " << item <<endl;
     cout <<"The list is now:" <<endl;
-    printList(myAL);*/
-    printList(myAL);
+    myAL.printList();
+
+    myAL.printList();
     cout << "Removing the first instance of 6" << endl << endl;
-    remove(myAL,0);
-    printList(myAL);
+    myAL.remove(6);
+    myAL.printList();
 }

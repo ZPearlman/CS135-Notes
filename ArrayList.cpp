@@ -2,111 +2,109 @@
 #include "ArrayList.h"
 using namespace std;
 
-ArrayList initialize(){
-
-    ArrayList al;
-    al.capacity = 8;
-    al.a = new int[al.capacity];
-    al.count = 0;
-    for (int i = 0; i < al.capacity; i++){
-        al.a[i] = 0;
-    }
-    return al;
-}
-
-void grow (ArrayList &al){
-    int* old = al.a;
-    al.a = new int[al.capacity*2];
-    for (int i = 0; i <al.count; i ++){
-        al.a[i] = old[i];
-    }
-    al.capacity *=2;
-
-    delete old;
+template <typename T> ArrayList<T>::ArrayList(){
+    capacity = 8;
+    a = new T[capacity];
+    count = 0;
+    // for (int i = 0; i < capacity; i++)
+    //     a[i] = 0;
 
 }
 
-void addItem(ArrayList &al, int num){
-    if (al.count + 1 >= al.capacity){
-        grow(al);
+template <typename T> void ArrayList<T>::addItem(T item){
+    if (count + 1 >= capacity){
+        grow();
     }
-    al.a[al.count++] = num;
+    a[count++] = item;
 }
 
-void printList(ArrayList al){
-    for(int i = 0; i<al.count; i++){
-        cout << al.a[i] << endl;
+template <typename T> void ArrayList<T>::printList(){
+    for(int i = 0; i < count; i++){
+        cout << a[i] << endl;
     }
 }
 
-int getItem(ArrayList al, int index){
-    if (index < 0 || index > al.count+1) {
+template <typename T> T ArrayList<T>::getItem(int index){
+    if (index < 0 || index > count+1) {
         throw out_of_range("");
     }
     else{
-        return al.a[index];
+        return a[index];
     }
 }
 
 
-int pop(ArrayList &al){
+template <typename T> T ArrayList<T>::pop(){
     //Removes the last element of the list
+    //T result;
 
-    int lastCount;
-    int result;
-
-    if (al.count == 0){
+    if (count == 0){
         throw out_of_range("List is empty");
         //return 0;  // Or throw exception.
     }
     else{
-        lastCount = al.count -1;
-        result = al.a[lastCount];
-        al.count--;
-        return result;
+        // result = a[--count];
+        // return result;
+
+        return a[--count];
     }
 }
 
-int pop(ArrayList &al, int index){
+template <typename T> T ArrayList<T>::pop(int index){
 
-    int result;
+    T result;
 
-    if (index < 0 || index >=al.count){
+    if (index < 0 || index >= count){
         throw out_of_range("Out of Bounds");
     }
-    result = al.a[index];
-    for (int i = index; i< al.count; i++){
-        al.a[i] = al.a[i+1];
+    result = a[index];
+    for (int i = index; i< count; i++){
+        a[i] = a[i+1];
     }
-    al.count --;
+    count --;
     return result;
 
 
 }
 
-void remove(ArrayList &al, int item){
+template <typename T> void ArrayList<T>::remove(T item){
     //Variable list
     int loc = 0; //Acts as "0" to avoid off by 1 error later on
 
-    while (loc <= al.count && (al.a[loc++] != item));
+    while (loc <= count && (a[loc++] != item));
 
-    if(loc > al.count){
+    if(loc > count){
         throw out_of_range("Item not in List");
     }
     else{
-        for (int i = loc - 1; i < al.count; i++){
-            al.a[i] = al.a[i+1];
+        for (int i = loc - 1; i < count; i++){
+            a[i] = a[i+1];
         }
-        al.count--;
+        count--;
     }
 }
 
-void insert(ArrayList &al, int item, int index){
-    if(index < 0 || index > al.count)
+template <typename T> void ArrayList<T>::insert(T item, int index){
+    if(index < 0 || index > count)
         throw out_of_range("Index Out of Bouonds");
-    if(++al.count == al.capacity)
-        grow(al);
+    if(++count == capacity)
+        grow();
         
-    for(int i = al.count; index < i; i--)
-        al.a[i] = al.a[i-1];
+    for(int i = count; index < i; i--)
+        a[i] = a[i-1];
+}
+
+template <typename T> void ArrayList<T>::grow(){
+    T* old = a;
+    a = new T[capacity*2];
+    for (int i = 0; i < count; i ++){
+        a[i] = old[i];
+    }
+    capacity *= 2;
+    delete old;
+
+}
+
+template <typename T> int ArrayList<T>::getCount(){
+    return count;
 }
