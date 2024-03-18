@@ -2,43 +2,41 @@
 #include "LinkedLists.h"
 using namespace std;
 
-LinkedList initialize(){
-    LinkedList ll;
-    ll.count = 0;
-    ll.start = NULL;
-    ll.end = NULL;
-    return ll;
+template <typename T> LinkedList<T>::LinkedList(){
+    count = 0;
+    start = NULL;
+    end = NULL;
 }
 
-void addItem(LinkedList &ll, int item){
+template <typename T> void LinkedList<T>::addItem(T item){
     node *newNode = new node;
     // newNode.calue = item; // illegal
     //(*newNode).value = item; // legal but ugly
     newNode -> value = item; // Better Looking -> means pointer
-    if(ll.count == 0){
-        ll.start = newNode;
-        ll.end = newNode;
+    if(count == 0){
+        start = newNode;
+        end = newNode;
     }
     else{
-        ll.end->next = newNode;
-        ll.end = newNode;
+        end->next = newNode;
+        end = newNode;
     }
-    ll.count++;
+    count++;
 }
 
-void printList(LinkedList ll){
-    node *p = ll.start;
-    for(int i = 0; i < ll.count; i++){
+template <typename T> void LinkedList<T>::printList(){
+    node *p = start;
+    for(int i = 0; i < count; i++){
         cout << p->value << endl;
         p = p->next;
     }
 }
 
-int getItem(LinkedList &ll, int index){
+template <typename T> T LinkedList<T>::getItem(int index){
     node *p;
-    p = ll.start;
+    p = start;
 
-    if(index < 0 || index >= ll.count)
+    if(index < 0 || index >= count)
         throw out_of_range("");
 
     else{
@@ -48,27 +46,27 @@ int getItem(LinkedList &ll, int index){
     return (*p).value;
 }
 
-void insertItem(LinkedList &ll, int item, int index){
+template <typename T> void LinkedList<T>::insertItem(T item, int index){
     node *p;
-    p = ll.start;
+    p = start;
 
-    if(index < 0 || index > ll.count)
+    if(index < 0 || index > count)
         throw out_of_range("");
 
     node *newNode = new node;
     (*newNode).value = item;
 
     if(index == 0){
-        (*newNode).next = ll.start;
-        ll.start = newNode; 
-        if(ll.count == 0)
-            ll.end = newNode;
+        (*newNode).next = start;
+        start = newNode; 
+        if(count == 0)
+            end = newNode;
     }
 
-    else if(index == ll.count){
-        (*ll.end).next = newNode;
-        ll.end = newNode;
-        (*ll.end).next = NULL;
+    else if(index == count){
+        (*end).next = newNode;
+        end = newNode;
+        (*end).next = NULL;
     }
 
     else{
@@ -78,32 +76,32 @@ void insertItem(LinkedList &ll, int item, int index){
         (*newNode).next = (*p).next;
         (*p).next = newNode;
     }
-    ll.count++;
+    count++;
 }
 
-int pop(LinkedList &ll){
+template <typename T> T LinkedList<T>::pop(){
     node *p;
-    int item;
+    T item;
 
-    if(ll.count == 0)
+    if(count == 0)
         throw out_of_range("");
 
-    else if(ll.count-- == 1){
-        p = ll.start;
+    else if(count-- == 1){
+        p = start;
         item = (*p).value;
-        ll.start = NULL;
-        ll.end = NULL;
+        start = NULL;
+        end = NULL;
         delete p;
     }
     
     else{
-        p = ll.start;
-        for(int i = 0; i < ll.count; i++)
+        p = start;
+        for(int i = 0; i < count-1; i++)
             p = (*p).next;
 
-        ll.end = p;
+        end = p;
         p = (*p).next;
-        (*ll.end).next = NULL; //ll.end->next = NULL
+        (*end).next = NULL; //ll.end->next = NULL
 
         item = (*p).value;
         delete p;
@@ -112,20 +110,20 @@ int pop(LinkedList &ll){
     return item;
 }
 
-int pop(LinkedList &ll, int index){
+template <typename T> T LinkedList<T>::pop(int index){
     node *p;
-    int item;
+    T item;
 
-    if (ll.count == 0 || index < 0 || index >= ll.count)
+    if (count == 0 || index < 0 || index >= count)
         throw out_of_range("");
 
-    else if(ll.count == 1 || index == --ll.count){
-        ll.count++;
-        item = pop(ll);
+    else if(count == 1 || index == --count){
+        count++;
+        item = pop();
     }
     else if (index == 0){
-        p = ll.start;
-        ll.start = (*p).next;
+        p = start;
+        start = (*p).next;
         item = (*p).value;
         delete p;
     }
@@ -144,13 +142,13 @@ int pop(LinkedList &ll, int index){
 }
 
 //Need to find a way to write this without using two nodes.
-void remove(LinkedList &ll, int item){
+template <typename T> void LinkedList<T>::remove(T item){
     node *p;
     node *temp;
 
-    p = ll.start;
+    p = start;
     if((*p).value == item){
-        ll.start = (*p).next;
+        start = (*p).next;
         delete p;
     }
     else{
@@ -164,7 +162,8 @@ void remove(LinkedList &ll, int item){
             throw out_of_range("");
 
         else if((*temp).next == NULL){
-            ll.end = p;
+            end = p;
+            (*end).next = NULL;
             delete temp;
         }
 
@@ -173,4 +172,9 @@ void remove(LinkedList &ll, int item){
             delete temp;
         }
     }
+    count--;
+}
+
+template <typename T> int LinkedList<T>::getCount(){
+    return count;
 }
