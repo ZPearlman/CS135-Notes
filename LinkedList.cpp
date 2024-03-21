@@ -1,5 +1,5 @@
 #include <iostream>
-#include "LinkedLists.h"
+#include "LinkedList.h"
 using namespace std;
 
 template <typename T> LinkedList<T>::LinkedList(){

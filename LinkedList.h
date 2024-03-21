@@ -42,5 +42,5 @@ class LinkedList{
 // int pop(LinkedList &ll, int index);
 // void remove(LinkedList &ll, int item);
 
-#include "LinkedLists.cpp"
+#include "LinkedList.cpp"
 #endif
