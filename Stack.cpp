@@ -41,7 +41,7 @@ template <typename T> T Stack<T>::pop(){
     return item; 
     }
     else{
-        cout << "Stack is empty" << count; //throw out_of_range("Stack is Empty");
+        throw out_of_range("Stack is Empty");
     }
 }
 
