@@ -23,8 +23,8 @@ class LinkedList{
 
     private:
         int count;
-        node *start;
-        node *end;
+        node<T> *start;
+        node<T> *end;
 };
 
 // struct LinkedList{
