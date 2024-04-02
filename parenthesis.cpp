@@ -10,20 +10,32 @@ int main(){
     try{
         char close;
         for(int i = 0; i < eq.length(); i++){
-        if(eq[i] == '(')
-            s.push('(');
-        if(eq[i] == '[')
-            s.push('[');
-        if(eq[i] == ')')
-            s.pop();
-        if(eq[i] == ']')
-            s.pop();
-        }
+            if(eq[i] == '(')
+                s.push('(');
 
+            if(eq[i] == '[')
+                s.push('[');
+
+            if(eq[i] == ')'){
+                if(s.peek() == '(')
+                    s.pop();
+                else
+                    cout << "Expression is bad" << endl;
+            }
+
+            if(eq[i] == ']'){
+                if(s.peek() == '[')
+                    s.pop();
+                else
+                    cout << "Exression is bad" << endl;
+            }
+        }
+        
         if(s.getCount())
             cout << "Bad" << endl;
         else
             cout << "Good" << endl;
+        
     }
     catch(out_of_range e){
         cout << "Bad" << endl;
