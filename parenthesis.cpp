@@ -19,18 +19,23 @@ int main(){
             if(eq[i] == ')'){
                 if(s.peek() == '(')
                     s.pop();
-                else
+                else{
                     cout << "Expression is bad" << endl;
+                    break;
+                }
             }
 
             if(eq[i] == ']'){
                 if(s.peek() == '[')
                     s.pop();
-                else
-                    cout << "Exression is bad" << endl;
+                else{
+                    cout << "Expression is bad" << endl;
+                    break;
+                }
+                    
             }
         }
-        
+
         if(s.getCount())
             cout << "Bad" << endl;
         else
