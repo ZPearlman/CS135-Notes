@@ -1,0 +1,30 @@
+#include <iostream>
+#include "Stack.h"
+
+using namespace std;
+
+int main(){
+    string eq = "253";
+    int total = 0;
+
+    for(int i = 0; i < eq.length(); i++){
+        cout << "'"<< eq[i] << "'" << endl;
+        int x = int(eq[i]) - 48; //Quick and dirty solution using ascii values
+        cout << x << endl;
+        total += x;
+        cout << total << endl;
+    }
+
+    return 0;
+}
+
+int postFix(string postFix){
+    Stack<int> eq;
+    int total;
+    for(int i= 0; i < postFix.length(); i++){
+        if(postFix[i] )
+    }
+
+
+    return total;
+}

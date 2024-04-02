@@ -8,10 +8,15 @@ int main(){
     string eq = "(5+10(2) / 13(6-1))";
     
     try{
+        char close;
         for(int i = 0; i < eq.length(); i++){
         if(eq[i] == '(')
             s.push('(');
+        if(eq[i] == '[')
+            s.push('[');
         if(eq[i] == ')')
+            s.pop();
+        if(eq[i] == ']')
             s.pop();
         }
 

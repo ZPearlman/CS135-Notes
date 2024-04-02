@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include "LinkedLists.h"
+#include "LinkedList.h"
 
 using namespace std;
 
@@ -12,5 +12,11 @@ int main(){
 
 
     outfile.close();
+
+    ifstream infile;
+    infile.open("Data.txt");
+    string str;
+    //str >> infile;
+
     return 0;
 }
