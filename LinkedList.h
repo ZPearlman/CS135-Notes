@@ -2,9 +2,9 @@
 #define __LinkedList__h
 
 
-
+template <typename T>
 struct node{
-    int value;
+    T value;
     node *next;
 };
 
