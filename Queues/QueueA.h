@@ -1,5 +1,5 @@
-#ifndef _Queue_h
-#define _Queue_h
+#ifndef _QueueA_h
+#define _QueueA_h
 
 template <typename T>
 class Queue{
@@ -16,11 +16,9 @@ class Queue{
         T *start;
         T *end;
         static int const capacity = 10;
-        T 
-        8a;
 };
 
 
-#include "Queue.cpp"
+#include "QueueA.cpp"
 
 #endif

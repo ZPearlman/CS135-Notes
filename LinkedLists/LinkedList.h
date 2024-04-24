@@ -5,7 +5,7 @@
 template <typename T>
 struct node{
     T value;
-    node *next;
+    node<T> *next;
 };
 
 template <typename T>
